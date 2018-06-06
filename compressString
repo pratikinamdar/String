@@ -1,0 +1,62 @@
+// this program takes in a string of non-numeric characters without spaces and gives an encoded(compressed) string as output in O(1) space and O(n) time
+#include <iostream>
+
+using namespace std;
+
+string compress(string str)
+{
+   int k = 0;
+    int count =1;
+    int write =0;
+    int i;
+    if(str == "\0" || str.length()==1)
+    return str;
+    else
+    {
+        for( i=1;i<str.length();i++)
+        {
+            if(str[i]==str[i-1])
+            {
+                count++;
+            }
+            else
+            {
+                
+                if(count!=1)
+                {
+                str[k]=str[i-1];
+                str[k+1]='0'+count;
+                
+                k+=2;
+                }
+                else k++;
+                count =1;
+            }
+        }
+       
+       if(count!=1)
+       {
+          str[k]=str[i-1];
+          str[k+1]='0'+count;
+          str[k+2]='\0';
+       
+       }
+       else
+       {
+           str[k+1]='\0';
+       }
+    }
+    
+    return str; 
+} 
+
+int main()
+{
+   string str = "";
+   str = compress(str);
+  for(int i=0;str[i]!='\0';i++)
+  {
+    cout<<str[i];   
+  }
+return 1;
+}
